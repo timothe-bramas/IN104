@@ -199,7 +199,6 @@ double* magnitude (char ** sound) {
             }					
 
             for (i =1; i <= 10; i++) {
-                    wav_data[i-1]=num_samples; // Traces du Sami
 
                 read = fread(data_buffer, sizeof(data_buffer), 1, ptr);
                 if (read == 1) {
@@ -225,8 +224,9 @@ double* magnitude (char ** sound) {
                             data_in_channel -= 128; //in wave, 8-bit are unsigned, so shifting to signed
                         }
 
-                        offset += bytes_in_each_channel;		
-                        printf("%d ", data_in_channel);
+                        offset += bytes_in_each_channel;
+
+                        wav_data[xchannels]=data_in_channel;
                     }
 
                 }
@@ -254,12 +254,8 @@ double* magnitude (char ** sound) {
  int n_elements = (length/(windowSize/2))*((windowSize/2)+1);
  int sample_freq = header.sample_rate;
  double* magnitude = malloc(n_elements*sizeof(double));
- // stft(double *wav_data, int samples, int windowSize, int hop_size, double *magnitude, int sample_freq, int length);
-
-
-
- return 0;
-
+ 
+ return stft(wav_data,n_elements,windowSize,hop_size,magnitude,sample_freq,length);
 }
 
 /**

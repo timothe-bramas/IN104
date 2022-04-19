@@ -24,8 +24,6 @@ char* seconds_to_time(float seconds);
  struct HEADER header;
 
 int main(int argc, char **argv) {
-    double* wav_data=malloc(10*sizeof(double));
-
 
  filename = (char*) malloc(sizeof(char) * 1024);
  if (filename == NULL) {
@@ -211,7 +209,6 @@ int main(int argc, char **argv) {
             printf("nn.Valid range for data values : %ld to %ld\n", low_limit, high_limit);
             for (i =1; i <= 10; i++) {
                 printf("==========Sample %ld / %ld=============n", i, num_samples);
-                    wav_data[i]=num_samples; // Traces du Sami
 
                 read = fread(data_buffer, sizeof(data_buffer), 1, ptr);
                 if (read == 1) {

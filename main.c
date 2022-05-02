@@ -20,8 +20,9 @@ printf("reduction faite\n");
 FILE* f=fopen(argv[2], "wb");
 for(int i=0; i<height*weight; i++){
   fprintf(f, "%f ; ", magncorr[i]);
-
-
+}
+}
+/*
 char* genres[] = {"blues","classical","country","disco","hiphop","jazz","metal","pop","reggae","rock"};
 
 
@@ -48,4 +49,5 @@ for (int l=0 ; l<100 ; l++) { // Incrémentation au sein du genre
 return 0;
 }
 }
-}
+
+*/

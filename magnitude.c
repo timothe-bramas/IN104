@@ -182,23 +182,7 @@ double* magnitude (char * sound, int* height, int* weight) {
  
         if (size_is_correct) { 
                     // the valid amplitude range for values based on the bits per sample
-            long low_limit = 0l;
-            long high_limit = 0l;
-
-            switch (header.bits_per_sample) {
-                case 8:
-                    low_limit = -128;
-                    high_limit = 127;
-                    break;
-                case 16:
-                    low_limit = -32768;
-                    high_limit = 32767;
-                    break;
-                case 32:
-                    low_limit = -2147483648;
-                    high_limit = 2147483647;
-                    break;
-            }					
+    
             for (i =1; i <= 10; i++) {
 
                 read = fread(data_buffer, sizeof(data_buffer), 1, ptr);

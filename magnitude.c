@@ -27,7 +27,6 @@ double* magnitude (char * sound, int* height, int* weight) {
     
 
 
-
  filename = (char*) malloc(sizeof(char) * 1024);
  if (filename == NULL) {
    printf("Error in malloc\n");

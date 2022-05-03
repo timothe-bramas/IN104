@@ -11,10 +11,10 @@ if (argc < 3) {
       return 1;
     }
 int height;
-int weight;
-double* magn = magnitude(argv[1], &height, &weight);
+int width;
+double* magn = magnitude(argv[1], &height, &width);
 printf("magn fait\n");
-double* magncorr=reduction_vect(magn, height, weight);
+double* magncorr=reduction_vect(magn, height, width);
 printf("reduction faite\n");
 
 FILE* f=fopen(argv[2], "wb");

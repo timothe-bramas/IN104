@@ -103,7 +103,6 @@ double* magnitude (char * sound, int* height, int* weight) {
 
 
  header.channels = buffer2[0] | (buffer2[1] << 8);
- double* wav_data=malloc(header.channels*sizeof(double));
 
 
  read = fread(buffer4, sizeof(buffer4), 1, ptr);
@@ -154,7 +153,7 @@ double* magnitude (char * sound, int* height, int* weight) {
 
  // calculate no.of samples
  long num_samples = (8 * header.data_size) / (header.channels * header.bits_per_sample);
-
+ double* wav_data=malloc(num_samples*sizeof(double));
 
  long size_of_each_sample = (header.channels * header.bits_per_sample) / 8;
 
@@ -182,7 +181,7 @@ double* magnitude (char * sound, int* height, int* weight) {
         if (size_is_correct) { 
                     // the valid amplitude range for values based on the bits per sample
     
-            for (i =1; i <= 10; i++) {
+            for (i =0; i < num_samples; i++) {
 
                 read = fread(data_buffer, sizeof(data_buffer), 1, ptr);
                 if (read == 1) {
@@ -210,7 +209,7 @@ double* magnitude (char * sound, int* height, int* weight) {
 
                         offset += bytes_in_each_channel;
 
-                        wav_data[xchannels]=data_in_channel;
+                        wav_data[i]=data_in_channel;
                     }
 
                 }
@@ -232,16 +231,16 @@ double* magnitude (char * sound, int* height, int* weight) {
 
 
 
- int length = header.channels;
+ int length = num_samples; //header.channels;
  int windowSize = 512;
  int hop_size = 512;
- int n_elements = (length/(windowSize/2))*((windowSize/2)+1);
+ double n_elements = ((length/(windowSize/2))*((windowSize/2)+1));
  int sample_freq = header.sample_rate;
  double* magnitude = malloc(n_elements*sizeof(double));
  *height=length/(windowSize/2);
  *weight=(windowSize/2)+1;
- printf("avant stft\n");
- stft(wav_data,n_elements,windowSize,hop_size,magnitude,sample_freq,header.channels);
+ stft(wav_data,n_elements,windowSize,hop_size,magnitude,sample_freq,num_samples);
+ 
  return magnitude;
 }
 

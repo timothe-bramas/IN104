@@ -37,11 +37,10 @@ double* stft(double *wav_data, int samples, int windowSize, int hop_size,\
   {
     summa+=hamming_result[i]*hamming_result[i];
   }
-  printf("test\n");
  
   int chunkPosition = 0; 
   int readIndex ; 
-  int n_elem_read = 0 ; 
+  int n_elem_read = 0 ;
 
   while (counter < samples- windowSize ){
     
@@ -54,9 +53,9 @@ double* stft(double *wav_data, int samples, int windowSize, int hop_size,\
     fftw_execute(plan_forward);
     for (i=0; i<windowSize/2 +1 ;i++)
     {
-      storage[counter] = fft_result[i]; 
+      storage[counter] = fft_result[i];
       counter+=1;
-
+      
     }
 
     chunkPosition += hop_size/2;
@@ -67,7 +66,7 @@ double* stft(double *wav_data, int samples, int windowSize, int hop_size,\
   {
     storage[i] /= (windowSize/2);
   }
-  printf("Magnitude\n");
+  
 
   for (i=0; i< counter; i++)
   {

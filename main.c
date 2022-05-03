@@ -18,7 +18,7 @@ double* magncorr=reduction_vect(magn, height, weight);
 printf("reduction faite\n");
 
 FILE* f=fopen(argv[2], "wb");
-for(int i=0; i<height*weight; i++){
+for(int i=0; i<height*2; i++){
   fprintf(f, "%f ; ", magncorr[i]);
 }
 }

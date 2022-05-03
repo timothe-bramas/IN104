@@ -232,7 +232,7 @@ double* magnitude (char * sound, int* height, int* weight) {
 
 
 
- int length = num_samples;
+ int length = header.channels;
  int windowSize = 512;
  int hop_size = 512;
  int n_elements = (length/(windowSize/2))*((windowSize/2)+1);

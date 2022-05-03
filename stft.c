@@ -31,12 +31,13 @@ double* stft(double *wav_data, int samples, int windowSize, int hop_size,\
   printf("Total length of storage %d\n", (samples));
   fftw_plan plan_forward;
   plan_forward = fftw_plan_dft_1d(windowSize,stft_data,fft_result, FFTW_FORWARD,FFTW_ESTIMATE);
-  printf("Creation of a hamming window...");
+  printf("Creation of a hamming window...\n");
   hamming(windowSize, hamming_result);
   for (i=0; i<windowSize; i++)
   {
     summa+=hamming_result[i]*hamming_result[i];
   }
+  printf("test\n");
  
   int chunkPosition = 0; 
   int readIndex ; 
@@ -82,28 +83,4 @@ double* stft(double *wav_data, int samples, int windowSize, int hop_size,\
   return magnitude;
 }
 
-int main()
-{
-  double wav_data[32];
-  int samples = 16;
-  int windowSize = 8;
-  int hop_size = 2;
-  double magnitude[16];
-  int sample_freq = 2;
-  int length = 32;
-
-  for (int i = 0; i < 32; i++)
-  {
-     wav_data[i] = i * 2.5;
-  }
-
-  stft(&wav_data[0], samples, windowSize, hop_size,&magnitude[0],sample_freq, length);
-  
-  for (int i = 0; i < 16; i++)
-  {
-    printf("%f\n", magnitude[i]);
-  }
-
-  return 0; 
-}
 

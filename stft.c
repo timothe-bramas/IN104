@@ -19,8 +19,7 @@ double hamming(int windowLength, double *buffer){
 //the main function should compute the  stft of the signal, return the stft
 //and the correlation points between a chosen window --for the moment --
 //and all the other windows
-double* stft(double *wav_data, int samples, int windowSize, int hop_size,\
-             double *magnitude, int sample_freq, int length)
+double* stft(double *wav_data, int samples, int windowSize, int hop_size, double *magnitude, int sample_freq, int length)
 {
   //samples is now the  wav file length
   printf("Initialization of parameters...\n");

@@ -1,22 +1,28 @@
 #include <stdio.h>
 #include <string.h>
 #include "magnitude.h"
-#include "magnitude.c"
-
+#include "utils.h"
+#include <stdlib.h>
 
 int main(int argc,char* argv[]) {
 
-if (argc < 2) {
+if (argc < 3) {
       printf("No wave file specified\n");
-      return;
+      return 1;
     }
+int height;
+int weight;
+double* magn = magnitude(argv[1], &height, &weight);
+printf("magn fait\n");
+double* magncorr=reduction_vect(magn, height, weight);
+printf("reduction faite\n");
 
-double* magn = magnitude(argv[1]);
-
-
-
-
-
+FILE* f=fopen(argv[2], "wb");
+for(int i=0; i<height*weight; i++){
+  fprintf(f, "%f ; ", magncorr[i]);
+}
+}
+/*
 char* genres[] = {"blues","classical","country","disco","hiphop","jazz","metal","pop","reggae","rock"};
 
 
@@ -40,5 +46,8 @@ for (int l=0 ; l<100 ; l++) { // Incrémentation au sein du genre
 
 // Faire subir stft à temp qui contient le nom de la musique (sans doute rajouter le chemin)
 
+return 0;
+}
+}
 
-}}}
+*/

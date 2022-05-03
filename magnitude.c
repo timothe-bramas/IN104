@@ -1,9 +1,6 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
-#include "wave.h"
-#include "stft.c"
 #define TRUE 1 
 #define FALSE 0
 
@@ -11,6 +8,7 @@
 
 unsigned char buffer4[4];
 unsigned char buffer2[2];
+
 
 char* seconds_to_time(float seconds);
 
@@ -22,10 +20,9 @@ char* seconds_to_time(float seconds);
 
 
 
+double* magnitude (char * sound, int* height, int* weight) {
 
-double* magnitude (char ** sound) {
     
-    double* wav_data=malloc(10*sizeof(double));
 
 
  filename = (char*) malloc(sizeof(char) * 1024);
@@ -104,6 +101,7 @@ double* magnitude (char ** sound) {
 
 
  header.channels = buffer2[0] | (buffer2[1] << 8);
+ double* wav_data=malloc(header.channels*sizeof(double));
 
 
  read = fread(buffer4, sizeof(buffer4), 1, ptr);
@@ -173,6 +171,7 @@ double* magnitude (char ** sound) {
 
         // make sure that the bytes-per-sample is completely divisible by num.of channels
         long bytes_in_each_channel = (size_of_each_sample / header.channels);
+
         if ((bytes_in_each_channel  * header.channels) != size_of_each_sample) {
             printf("Error: %ld x %ud <> %ldn", bytes_in_each_channel, header.channels, size_of_each_sample);
             size_is_correct = FALSE;
@@ -180,23 +179,6 @@ double* magnitude (char ** sound) {
  
         if (size_is_correct) { 
                     // the valid amplitude range for values based on the bits per sample
-            long low_limit = 0l;
-            long high_limit = 0l;
-
-            switch (header.bits_per_sample) {
-                case 8:
-                    low_limit = -128;
-                    high_limit = 127;
-                    break;
-                case 16:
-                    low_limit = -32768;
-                    high_limit = 32767;
-                    break;
-                case 32:
-                    low_limit = -2147483648;
-                    high_limit = 2147483647;
-                    break;
-            }					
 
             for (i =1; i <= 10; i++) {
 
@@ -254,8 +236,11 @@ double* magnitude (char ** sound) {
  int n_elements = (length/(windowSize/2))*((windowSize/2)+1);
  int sample_freq = header.sample_rate;
  double* magnitude = malloc(n_elements*sizeof(double));
- 
- return stft(wav_data,n_elements,windowSize,hop_size,magnitude,sample_freq,length);
+ *height=length/(windowSize/2);
+ *weight=(windowSize/2)+1;
+ printf("avant stft\n");
+ stft(wav_data,n_elements,windowSize,hop_size,magnitude,sample_freq,header.channels);
+ return magnitude;
 }
 
 

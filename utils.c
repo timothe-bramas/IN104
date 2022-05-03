@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 double moyenne(double*data, int length){
     double s=0;
@@ -12,7 +13,7 @@ double moyenne(double*data, int length){
 double* reduction_vect(double*data, int height, int weight){
     double moy;
     double var;
-    double*ligne;
+    double*ligne=malloc(height*sizeof(double));
     double* tab=malloc(2*height*sizeof(double));
     for(int i=0; i<height; i++){
         for(int j=0;j<weight;j++){ligne[j]=data[i*weight+j];}   //Récupération de la ligne

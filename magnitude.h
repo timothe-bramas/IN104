@@ -14,3 +14,6 @@ struct HEADER {
 	unsigned char data_chunk_header [4];		// DATA string or FLLR string
 	unsigned int data_size;						// NumSamples * NumChannels * BitsPerSample/8 - size of the next chunk that will be read
 };
+
+char* seconds_to_time(float raw_seconds);
+double* magnitude (char * sound, int* height, int* weight);

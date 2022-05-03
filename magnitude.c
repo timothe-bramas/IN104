@@ -1,5 +1,8 @@
 #include <unistd.h>
 #include <stdio.h>
+#include "magnitude.h"
+#include <stdlib.h>
+#include "stft.h"
 #include <string.h>
 #define TRUE 1 
 #define FALSE 0
@@ -21,8 +24,8 @@ char* seconds_to_time(float seconds);
 
 
 double* magnitude (char * sound, int* height, int* weight) {
-
     
+
 
 
  filename = (char*) malloc(sizeof(char) * 1024);
@@ -179,7 +182,7 @@ double* magnitude (char * sound, int* height, int* weight) {
  
         if (size_is_correct) { 
                     // the valid amplitude range for values based on the bits per sample
-
+    
             for (i =1; i <= 10; i++) {
 
                 read = fread(data_buffer, sizeof(data_buffer), 1, ptr);

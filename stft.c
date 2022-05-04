@@ -60,7 +60,6 @@ double* stft(double *wav_data, int samples, int windowSize, int hop_size,\
 
     chunkPosition += hop_size/2;
   }
-  printf("%d\n", counter);
 
   for (i=0; i<counter; i++)
   {

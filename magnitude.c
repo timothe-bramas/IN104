@@ -181,7 +181,7 @@ double* magnitude (char * sound, int* height, int* weight) {
         if (size_is_correct) { 
                     // the valid amplitude range for values based on the bits per sample
     
-            for (i =0; i < num_samples; i++) {
+            for (i =1; i < num_samples; i++) {
 
                 read = fread(data_buffer, sizeof(data_buffer), 1, ptr);
                 if (read == 1) {

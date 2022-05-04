@@ -17,8 +17,12 @@ double* reduction_vect(double*data, int height, int width){
     double*ligne=malloc(width*sizeof(double));
     double* tab=malloc(2*height*sizeof(double));
     for(int i=0; i<height; i++){
-        for(int j=0;j<width;j++){ligne[j]=data[i*width+j];}   //Récupération de la ligne
+        for(int j=0;j<width;j++){ligne[j]=data[i*width+j]; // Récupération de la ligne
+        // if (i==0) printf("MAGN %f\n",data[i*width+j]);
+        }   
         moy=moyenne(ligne, width);
+        // if (i==0) printf("MOY %f\n",moy);
+        
         tab[2*i]=moy;
         for(int j=0;j<width;j++){ligne[j]=(ligne[j]-moy)*(ligne[j]-moy);}
         var=moyenne(ligne, width);

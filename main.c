@@ -1,27 +1,38 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "magnitude.h"
 #include "utils.h"
-#include <stdlib.h>
+
+
+// gcc main.c utils.c magnitude.c stft.c -lfftw3 -lm
+// ./a.out blues.00000.wav test.txt
+
 
 int main(int argc,char* argv[]) {
 
-if (argc < 3) {
+if (argc < 2) {
       printf("No wave file specified\n");
       return 1;
     }
+
+if (argc < 3) {
+      printf("No csv file specified\n");
+      return 1;
+    }
+
 int height;
 int width;
+
 double* magn = magnitude(argv[1], &height, &width);
-printf("magn fait\n");
+
 double* magncorr=reduction_vect(magn, height, width);
-printf("reduction faite\n");
 
 FILE* f=fopen(argv[2], "wb");
-for(int i=0; i<height*2; i++){
-  fprintf(f, "%f ; ", magncorr[i]);
+for(int i=0; i<height*2; i++){fprintf(f, "%f ; ", magncorr[i]);}
 }
-}
+
+
 /*
 char* genres[] = {"blues","classical","country","disco","hiphop","jazz","metal","pop","reggae","rock"};
 

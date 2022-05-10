@@ -8,19 +8,13 @@
 int main(int argc,char* argv[]) {
 
 
-/*
-if (argc < 2) {
-      printf("No wave file specified\n");
-      return;
-    }
 
-double* magn = magnitude(argv[1]);
-*/
+// char path[] = "../../genres/";
+// char* genres[] = {"blues","classical","country","disco","hiphop","jazz","metal","pop","reggae","rock"};
+// char ref[] = ".00000.wav";
 
 
-
-
-char* genres[] = {"blues.00000.wav","classical.00000.wav","country.00000.wav","disco.00000.wav","hiphop.00000.wav","jazz.00000.wav","metal.00000.wav","pop.00000.wav","reggae.00000.wav","rock.00000.wav"};
+char* genres[] = {"../../genres/blues/blues.00000.wav","../../genres/classical/classical.00000.wav","../../genres/country/country.00000.wav","../../genres/disco/disco.00000.wav","../../genres/hiphop/hiphop.00000.wav","../../genres/jazz/jazz.00000.wav","../../genres/metal/metal.00000.wav","../../genres/pop/pop.00000.wav","../../genres/reggae/reggae.00000.wav","../../genres/rock/rock.00000.wav"};
 
 
 for (int i = 0 ; i<10 ; i++) { // Boucle sur les 10 genres

@@ -12,53 +12,36 @@
 int main(int argc,char* argv[]) {
 
 if (argc < 2) {
-      printf("No wave file specified\n");
+      printf("No out file specified\n");
       return 1;
     }
 
-if (argc < 3) {
-      printf("No csv file specified\n");
-      return 1;
-    }
+
 
 int height;
 int width;
-
-double* magn = magnitude(argv[1], &height, &width);
-
-double* magncorr=reduction_vect(magn, height, width);
-
-FILE* f=fopen(argv[2], "wb");
-for(int i=0; i<height*2; i++){fprintf(f, "%f ; ", magncorr[i]);}
-}
+FILE* f=fopen(argv[1], "wb");
+double* magn;
+double* magncorr;
+char* genres[] = {"../genres/blues/blues.00000.wav","../genres/classical/classical.00000.wav","../genres/country/country.00000.wav","../genres/disco/disco.00000.wav","../genres/hiphop/hiphop.00000.wav","../genres/jazz/jazz.00000.wav","../genres/metal/metal.00000.wav","../genres/pop/pop.00000.wav","../genres/reggae/reggae.00000.wav","../genres/rock/rock.00000.wav"};
 
 
-/*
-char* genres[] = {"blues","classical","country","disco","hiphop","jazz","metal","pop","reggae","rock"};
-
-
-for (int i = 0 ; i<10 ; i++) {
-int len_temp=strlen(genres[i])+6;
+for (int i = 0 ; i<10 ; i++) { // Boucle sur les 10 genres
+int len_temp=strlen(genres[i]); // +10 caractères car on ajoute ".00000.wav"
 char temp[len_temp];
-char num[6]=".00000";
+strcpy(temp,genres[i]); // temp contiendra le nom de la musique numéro l du genre i
 
 
-for (int l=0 ; l<len_temp ; l++) { // Initialisation de temp au genre donné
-if (l<len_temp-6) {temp[l]=genres[i][l];}
-else {temp[l]=num[l];}}
-
-for (int l=0 ; l<100 ; l++) { // Incrémentation au sein du genre
-    char c1 = l%10 + '0';
-    char c2 = (l%100 - l%10)/10 + '0';
-    temp[len_temp-1]=c1;
-    temp[len_temp-2]=c2;
-
-
-
-// Faire subir stft à temp qui contient le nom de la musique (sans doute rajouter le chemin)
-
-return 0;
+for (int l=0 ; l<100 ; l++) { // Boucle sur le numéro de la musique
+    char c1 = l%10 + '0'; // Chiffre des unités
+    char c2 = (l%100 - l%10)/10 + '0'; // Chiffre des dizaines
+    temp[len_temp-1-4]=c1;
+    temp[len_temp-2-4]=c2;
+    magn = magnitude(temp, &height, &width);
+    magncorr=reduction_vect(magn, height, width);
+    fprintf(f, "%d; ", i);
+    for(int k=0; k<height*2; k++){fprintf(f, "%f; ", magncorr[k]);}
+    fprintf(f, "\n");
+  }   
 }
 }
-
-*/

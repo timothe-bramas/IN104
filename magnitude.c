@@ -45,7 +45,6 @@ double* magnitude (char * sound, int* height, int* weight) {
  }
 
  // open file
- printf("Opening  file\n");
  ptr = fopen(filename, "rb");
  if (ptr == NULL) {
     printf("Error opening file\n");

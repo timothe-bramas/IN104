@@ -19,7 +19,6 @@ double hamming(int windowLength, double *buffer){
 double* stft(double *wav_data, int samples, int windowSize, int hop_size,\
              double *magnitude, int sample_freq, int length)
 {
-  printf("Initialization of parameters...\n");
   int i,counter ;
   counter = 0 ;
   double hamming_result[windowSize];
@@ -28,10 +27,8 @@ double* stft(double *wav_data, int samples, int windowSize, int hop_size,\
   stft_data = (fftw_complex*)(fftw_malloc(sizeof(fftw_complex)*(windowSize)));
   fft_result= (fftw_complex*)(fftw_malloc(sizeof(fftw_complex)*(windowSize)));
   storage = (fftw_complex*)(fftw_malloc(sizeof(fftw_complex)*(samples)));
-  printf("Total length of storage %d\n", (samples));
   fftw_plan plan_forward;
   plan_forward = fftw_plan_dft_1d(windowSize,stft_data,fft_result, FFTW_FORWARD,FFTW_ESTIMATE);
-  printf("Creation of a hamming window...\n");
   hamming(windowSize, hamming_result);
   for (i=0; i<windowSize; i++)
   {

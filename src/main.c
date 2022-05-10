@@ -17,6 +17,7 @@ if (argc < 2) {
     }
 
 
+char temp[256];
 
 int height;
 int width;
@@ -28,7 +29,6 @@ char* genres[] = {"../../genres/blues/blues.00000.wav","../../genres/classical/c
 
 for (int i = 0 ; i<10 ; i++) { // Boucle sur les 10 genres
 int len_temp=strlen(genres[i]); // +10 caractères car on ajoute ".00000.wav"
-char temp[len_temp];
 strcpy(temp,genres[i]); // temp contiendra le nom de la musique numéro l du genre i
 
 
@@ -40,7 +40,7 @@ for (int l=0 ; l<100 ; l++) { // Boucle sur le numéro de la musique
     magn = magnitude(temp, &height, &width);
     magncorr=reduction_vect(magn, height, width);
     fprintf(f, "%d; ", i);
-    for(int k=0; k<height*2; k++){fprintf(f, "%f; ", magncorr[k]);}
+    for(int k=0; k<height*2; k++){fprintf(f, "%.1f; ", magncorr[k]);}
     fprintf(f, "\n");
   }   
 }

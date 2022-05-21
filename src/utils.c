@@ -10,7 +10,6 @@ double moyenne(double*data, int length){
 }
 
 
-//Trace du timtim
 
 double* reduction_vect(double*data,  int height, int width){
     double moy;

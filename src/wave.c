@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
     
     strcat(filename, "/");
     strcat(filename, argv[1]);
-    printf("%sn", filename);
+    printf("%s\n", filename);
  }
 
  // open file
@@ -64,7 +64,7 @@ int main(int argc, char **argv) {
  printf("(1-4): %s\n", header.riff); 
 
  read = fread(buffer4, sizeof(buffer4), 1, ptr);
- printf("%u %u %u %un", buffer4[0], buffer4[1], buffer4[2], buffer4[3]);
+ printf("%u %u %u %u\n", buffer4[0], buffer4[1], buffer4[2], buffer4[3]);
  
  // convert little endian to big endian 4 byte int
  header.overall_size  = buffer4[0] | 
@@ -75,13 +75,13 @@ int main(int argc, char **argv) {
  printf("(5-8) Overall size: bytes:%u, Kb:%u\n", header.overall_size, header.overall_size/1024);
 
  read = fread(header.wave, sizeof(header.wave), 1, ptr);
- printf("(9-12) Wave marker: %sn", header.wave);
+ printf("(9-12) Wave marker: %s\n", header.wave);
 
  read = fread(header.fmt_chunk_marker, sizeof(header.fmt_chunk_marker), 1, ptr);
- printf("(13-16) Fmt marker: %sn", header.fmt_chunk_marker);
+ printf("(13-16) Fmt marker: %s\n", header.fmt_chunk_marker);
 
  read = fread(buffer4, sizeof(buffer4), 1, ptr);
- printf("%u %u %u %un", buffer4[0], buffer4[1], buffer4[2], buffer4[3]);
+ printf("%u %u %u %u\n", buffer4[0], buffer4[1], buffer4[2], buffer4[3]);
 
  // convert little endian to big endian 4 byte integer
  header.length_of_fmt = buffer4[0] |
@@ -110,23 +110,23 @@ int main(int argc, char **argv) {
  printf("(23-24) Channels: %u\n", header.channels);
 
  read = fread(buffer4, sizeof(buffer4), 1, ptr);
- printf("%u %u %u %un", buffer4[0], buffer4[1], buffer4[2], buffer4[3]);
+ printf("%u %u %u %u\n", buffer4[0], buffer4[1], buffer4[2], buffer4[3]);
 
  header.sample_rate = buffer4[0] |
                         (buffer4[1] << 8) |
                         (buffer4[2] << 16) |
                         (buffer4[3] << 24);
 
- printf("(25-28) Sample rate: %un", header.sample_rate);
+ printf("(25-28) Sample rate: %u\n", header.sample_rate);
 
  read = fread(buffer4, sizeof(buffer4), 1, ptr);
- printf("%u %u %u %un", buffer4[0], buffer4[1], buffer4[2], buffer4[3]);
+ printf("%u %u %u %u\n", buffer4[0], buffer4[1], buffer4[2], buffer4[3]);
 
  header.byterate  = buffer4[0] |
                         (buffer4[1] << 8) |
                         (buffer4[2] << 16) |
                         (buffer4[3] << 24);
- printf("(29-32) Byte Rate: %u , Bit Rate:%un", header.byterate, header.byterate*8);
+ printf("(29-32) Byte Rate: %u , Bit Rate:%u\n", header.byterate, header.byterate*8);
 
  read = fread(buffer2, sizeof(buffer2), 1, ptr);
  printf("%u %u\n", buffer2[0], buffer2[1]);
@@ -146,7 +146,7 @@ int main(int argc, char **argv) {
  printf("(37-40) Data Marker: %s \n", header.data_chunk_header);
 
  read = fread(buffer4, sizeof(buffer4), 1, ptr);
- printf("%u %u %u %un", buffer4[0], buffer4[1], buffer4[2], buffer4[3]);
+ printf("%u %u %u %u\n", buffer4[0], buffer4[1], buffer4[2], buffer4[3]);
 
  header.data_size = buffer4[0] |
                 (buffer4[1] << 8) |
@@ -160,12 +160,12 @@ int main(int argc, char **argv) {
  printf("Number of samples:%lu \n", num_samples);
 
  long size_of_each_sample = (header.channels * header.bits_per_sample) / 8;
- printf("Size of each sample:%ld bytesn", size_of_each_sample);
+ printf("Size of each sample:%ld bytes\n", size_of_each_sample);
 
  // calculate duration of file
  float duration_in_seconds = (float) header.overall_size / header.byterate;
- printf("Approx.Duration in seconds=%fn", duration_in_seconds);
- printf("Approx.Duration in h:m:s=%sn", seconds_to_time(duration_in_seconds));
+ printf("Approx.Duration in seconds=%f\n", duration_in_seconds);
+ printf("Approx.Duration in h:m:s=%s\n", seconds_to_time(duration_in_seconds));
 
 
 
@@ -182,7 +182,7 @@ int main(int argc, char **argv) {
         // make sure that the bytes-per-sample is completely divisible by num.of channels
         long bytes_in_each_channel = (size_of_each_sample / header.channels);
         if ((bytes_in_each_channel  * header.channels) != size_of_each_sample) {
-            printf("Error: %ld x %ud <> %ldn", bytes_in_each_channel, header.channels, size_of_each_sample);
+            printf("Error: %ld x %ud <> %ld\n", bytes_in_each_channel, header.channels, size_of_each_sample);
             size_is_correct = FALSE;
         }
  
@@ -208,7 +208,7 @@ int main(int argc, char **argv) {
 
             printf("nn.Valid range for data values : %ld to %ld\n", low_limit, high_limit);
             for (i =1; i <= 10; i++) {
-                printf("==========Sample %ld / %ld=============n", i, num_samples);
+                printf("==========Sample %ld / %ld=============\n", i, num_samples);
 
                 read = fread(data_buffer, sizeof(data_buffer), 1, ptr);
                 if (read == 1) {
@@ -240,15 +240,15 @@ int main(int argc, char **argv) {
 
                         // check if value was in range
                         if (data_in_channel < low_limit || data_in_channel > high_limit)
-                            printf("**value out of rangen");
+                            printf("**value out of range\n");
 
                         printf(" | ");
                     }
 
-                    printf("n");
+                    printf("\n");
                 }
                 else {
-                    printf("Error reading file. %d bytesn", read);
+                    printf("Error reading file. %d bytes\n", read);
                     break;
                 }
 

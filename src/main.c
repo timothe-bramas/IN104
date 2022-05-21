@@ -17,18 +17,16 @@ if (argc < 2) {
     }
 
 
-char temp[256];
-
 int height;
 int width;
 FILE* f=fopen(argv[1], "wb");
 double* magn;
 double* magncorr;
-char* genres[] = {"../genres/blues/blues.00000.wav","../genres/classical/classical.00000.wav","../genres/country/country.00000.wav","../genres/disco/disco.00000.wav","../genres/hiphop/hiphop.00000.wav","../genres/jazz/jazz.00000.wav","../genres/metal/metal.00000.wav","../genres/pop/pop.00000.wav","../genres/reggae/reggae.00000.wav","../genres/rock/rock.00000.wav"};
+char* genres[] = {"../../genres/blues/blues.00000.wav","../../genres/classical/classical.00000.wav","../../genres/country/country.00000.wav","../../genres/disco/disco.00000.wav","../../genres/hiphop/hiphop.00000.wav","../../genres/jazz/jazz.00000.wav","../../genres/metal/metal.00000.wav","../../genres/pop/pop.00000.wav","../../genres/reggae/reggae.00000.wav","../../genres/rock/rock.00000.wav"};
 char temp[256];
 
 
-//magn = magnitude("../genres/blues/blues.00000.wav", &height, &width);
+//magn = magnitude("../../genres/blues/blues.00000.wav", &height, &width);
 //printf("%d %d\n",height,width);}
 
 

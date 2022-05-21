@@ -12,22 +12,22 @@ double moyenne(double*data, int length){
 
 //Trace du timtim
 
-double* reduction_vect(double*data, int height, int width){
+double* reduction_vect(double*data,  int height, int width){
     double moy;
     double ecart_type;
-    double*ligne=malloc(width*sizeof(double));
-    double* tab=malloc(2*height*sizeof(double));
-    for(int i=0; i<height; i++){
-        for(int j=0;j<width;j++){ligne[j]=data[i*width+j]; // Récupération de la ligne
-        // if (i==0) printf("MAGN %f\n",data[i*width+j]);
+    double*colonne=malloc(height*sizeof(double));
+    double* tab=malloc(2*width*sizeof(double));
+    for(int j=0; j<width; j++){
+        for(int i=0;i<height;i++){colonne[i]=data[j*height+i]; // Récupération de la colonne
+        // if (j==0) printf("MAGN %f\n",data[j*height+i]);
         }   
-        moy=moyenne(ligne, width);
-        // if (i==0) printf("MOY %f\n",moy);
+        moy=moyenne(colonne, height);
+        // if (j==0) printf("MOY %f\n",moy);
         
-        tab[2*i]=moy;
-        for(int j=0;j<width;j++){ligne[j]=(ligne[j]-moy)*(ligne[j]-moy);}
-        ecart_type=sqrt(moyenne(ligne, width));
-        tab[2*i+1]=ecart_type;
+        tab[2*j]=moy;
+        for(int i=0;i<height;i++){colonne[i]=(colonne[i]-moy)*(colonne[i]-moy);}
+        ecart_type=sqrt(moyenne(colonne, height));
+        tab[2*j+1]=ecart_type;
         }
     return tab;    
     }

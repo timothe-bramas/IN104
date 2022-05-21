@@ -24,11 +24,17 @@ FILE* f=fopen(argv[1], "wb");
 double* magn;
 double* magncorr;
 char* genres[] = {"../genres/blues/blues.00000.wav","../genres/classical/classical.00000.wav","../genres/country/country.00000.wav","../genres/disco/disco.00000.wav","../genres/hiphop/hiphop.00000.wav","../genres/jazz/jazz.00000.wav","../genres/metal/metal.00000.wav","../genres/pop/pop.00000.wav","../genres/reggae/reggae.00000.wav","../genres/rock/rock.00000.wav"};
+char temp[256];
+
+
+//magn = magnitude("../genres/blues/blues.00000.wav", &height, &width);
+//printf("%d %d\n",height,width);}
+
+
 
 
 for (int i = 0 ; i<10 ; i++) { // Boucle sur les 10 genres
-int len_temp=strlen(genres[i]); // +10 caractères car on ajoute ".00000.wav"
-char temp[len_temp];
+int len_temp=strlen(genres[i]);
 strcpy(temp,genres[i]); // temp contiendra le nom de la musique numéro l du genre i
 
 
@@ -40,7 +46,7 @@ for (int l=0 ; l<100 ; l++) { // Boucle sur le numéro de la musique
     magn = magnitude(temp, &height, &width);
     magncorr=reduction_vect(magn, height, width);
     fprintf(f, "%d; ", i);
-    for(int k=0; k<height*2; k++){fprintf(f, "%f; ", magncorr[k]);}
+    for(int k=0; k<width*2; k++){fprintf(f, "%.1f; ", magncorr[k]);}
     fprintf(f, "\n");
   }   
 }

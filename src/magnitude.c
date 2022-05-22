@@ -23,7 +23,7 @@ char* seconds_to_time(float seconds);
 
 
 
-double* magnitude (char * sound, int* height, int* weight) {
+double* magnitude (char * sound, int* nCol, int* nRow) {
     
 
 
@@ -235,8 +235,8 @@ double* magnitude (char * sound, int* height, int* weight) {
  double n_elements = ((length/(windowSize/2))*((windowSize/2)+1));
  int sample_freq = header.sample_rate;
  double* magnitude = malloc(n_elements*sizeof(double));
- *height=length/(windowSize/2);
- *weight=(windowSize/2)+1;
+ *nCol=(int) length/(windowSize/2);
+ *nRow=(int) (windowSize/2)+1;
  stft(wav_data,n_elements,windowSize,hop_size,magnitude,sample_freq,num_samples);
  
  return magnitude;

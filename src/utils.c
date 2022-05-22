@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
 double moyenne(double*data, int length){
     double s=0;
     for(int i=0;i<length;i++){s+=data[i];}
@@ -44,4 +43,34 @@ void reduction_vect2(double*arr, int nCol, int nRow, double* mean, double*std){
         mean[i]=sum/nCol;
         std[i]=sqrt(sumsq/nCol - mean[i]*mean[i]);
     }
+}
+
+
+double* produit_mat(double* mat1, double* mat2, int m, int n, int p){
+    //fait le produit d'une matrice m n et d'une matrice n p
+    double * mat = malloc(m*p*sizeof(double));
+    int index;
+    for(int i =0; i<m;i++){
+        for(int j=0; j<p;j++){
+            index=i+j*m;
+            mat[index]=0;
+            for(int k=0; k<n;k++){
+                mat[index]=mat[index]+ (mat1[i+k*m] * mat2[i+k*n]);
+            }
+        }
+    }
+    return mat;
+}
+
+double* somme_mat(double* mat1,double* mat2,int m,int n){
+    double* mat=malloc(m*n*sizeof(double));
+    int index;
+    for(int i =0; i<m;i++){
+        for(int j=0;j<n;j++){
+            index=i+j*m;
+            mat[index]=mat1[index]+mat2[index];
+
+        }
+    }
+    return mat;
 }

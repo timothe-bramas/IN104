@@ -38,8 +38,8 @@ void reduction_vect2(double*arr, int nCol, int nRow, double* mean, double*std){
         sum=0;
         sumsq=0;
         for (int j = 0; j < nCol; j++){
-            sum=sum+(double)arr[i+j*nRow];
-            sumsq=sumsq+(double)arr[i+j*nRow];
+            sum=sum+ arr[i+j*nRow];
+            sumsq= sumsq + arr[i + j * nRow] * arr[i + j * nRow];
         }
         mean[i]=sum/nCol;
         std[i]=sqrt(sumsq/nCol - mean[i]*mean[i]);

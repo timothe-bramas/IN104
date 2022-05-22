@@ -32,7 +32,7 @@ char temp[256];
 
 
 
-for (int i = 0 ; i<10 ; i++) { // Boucle sur les 10 genres
+for (int i = 0 ; i<5 ; i++) { // Boucle sur les 10 genres
 int len_temp=strlen(genres[i]);
 strcpy(temp,genres[i]); // temp contiendra le nom de la musique numéro l du genre i
 
@@ -44,8 +44,8 @@ for (int l=0 ; l<100 ; l++) { // Boucle sur le numéro de la musique
     temp[len_temp-2-4]=c2;
     magn = magnitude(temp, &height, &width);
     magncorr=reduction_vect(magn, height, width);
-    fprintf(f, "%d; ", i);
-    for(int k=0; k<width*2; k++){fprintf(f, "%f; ", magncorr[k]);}
+    fprintf(f, "%d;", i);
+    for(int k=0; k<width*2; k++){fprintf(f, "%.2f;", magncorr[k]);}
     fprintf(f, "\n");
   }   
 }

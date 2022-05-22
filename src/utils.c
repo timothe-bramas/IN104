@@ -30,3 +30,18 @@ double* reduction_vect(double*data,  int height, int width){
         }
     return tab;    
     }
+
+void reduction_vect2(double*arr, int nCol, int nRow, double* mean, double*std){
+    double sum=0;
+    double sumsq=0;
+    for (int i = 0; i < nRow; i++){
+        sum=0;
+        sumsq=0;
+        for (int j = 0; j < nCol; j++){
+            sum=sum+(double)arr[i+j*nRow];
+            sumsq=sumsq+(double)arr[i+j*nRow];
+        }
+        mean[i]=sum/nCol;
+        std[i]=sqrt(sumsq/nCol - mean[i]*mean[i]);
+    }
+}

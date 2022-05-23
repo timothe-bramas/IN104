@@ -20,7 +20,7 @@ y = batch_audio[:, 0]
 
 X_train, X_test, y_train, y_test = train_test_split(features, y, test_size=0.2, random_state=0)
 
-model = LinearSVC(C=0.1, max_iter=100, tol=1e-4) 
+model = LinearSVC(C=0.1, max_iter=1000, tol=1e-5) 
 
 # On peut modifier les paramètres C, max_iter et tol, pour augmenter la performance du modèle.
 

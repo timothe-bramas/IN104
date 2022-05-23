@@ -34,7 +34,7 @@ double* std=malloc(nRow*sizeof(double));
 
 
 
-for (int i = 8 ; i < 10 ; i++) { // Boucle sur les 10 genres
+for (int i = 0 ; i < 4 ; i++) { // Boucle sur les 10 genres
 int len_temp=strlen(genres[i]);
 strcpy(temp,genres[i]); // temp contiendra le nom de la musique numéro l du genre i
 
@@ -47,8 +47,11 @@ for (int l=0 ; l<100 ; l++) { // Boucle sur le numéro de la musique
     magn = magnitude(temp, &nCol, &nRow);
     reduction_vect2(magn, nCol, nRow, mean, std);
     fprintf(f, "%d", i);
-    for(int k=0; k<nRow; k++){fprintf(f, ";%.2f;%.2f", mean[k], std[k]); }
+    for(int k=0; k<nRow; k++){fprintf(f, ";%f;%f", mean[k], std[k]); }
     fprintf(f, "\n");
+    fclose(f);
+    free(mean);
+    free(std);
   }   
 }
 }

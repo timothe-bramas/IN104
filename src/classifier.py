@@ -15,7 +15,22 @@ columns = dataset.columns.tolist() # get the columns
 
 batch_audio = pd.DataFrame(dataset).to_numpy()
 
+def normalize(X):
+    '''
+    Batch normalization
+    '''
+    X_normalized = np.zeros((X.shape))
+    for j in range(X.shape[1]):
+        mean = np.mean(X[:, j])
+        std = np.std(X[:, j])
+        for i in range(X.shape[0]):
+            X_normalized[i, j] = (X[i, j] - mean) / (std + 0.000001)
+    return X_normalized
+
+
 features = batch_audio[:, 1:]
+
+features=normalize(features)
 y = batch_audio[:, 0]
 
 X_train, X_test, y_train, y_test = train_test_split(features, y, test_size=0.2, random_state=0)
@@ -49,14 +64,3 @@ print("Performances du modèle sur la base de données de test : ", model.score(
 
 ### Technique pour obtenir une nette amélioration des performances : normaliser les entrées du classifieur avec la batch normalization (Xi - mean / (std + epsilon)) 
 
-    # def normalize(X):
-    #     '''
-    #     Batch normalization
-    #     '''
-    #     X_normalized = np.zeros((X.shape))
-    #     for j in range(X.shape[1]):
-    #         mean = np.mean(X[:, j])
-    #         std = np.std(X[:, j])
-    #         for i in range(X.shape[0]):
-    #             X_normalized[i, j] = (X[i, j] - mean) / (std + 0.000001)
-    #     return X_normalized

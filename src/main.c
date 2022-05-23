@@ -22,17 +22,18 @@ int nRow;
 int nCol;
 FILE* f=fopen(argv[1], "wb");
 double* magn;
-double*magncorr;
 char* genres[] = {"../../genres/blues/blues.00000.wav","../../genres/classical/classical.00000.wav","../../genres/country/country.00000.wav","../../genres/disco/disco.00000.wav","../../genres/hiphop/hiphop.00000.wav","../../genres/jazz/jazz.00000.wav","../../genres/metal/metal.00000.wav","../../genres/pop/pop.00000.wav","../../genres/reggae/reggae.00000.wav","../../genres/rock/rock.00000.wav"};
 char temp[256];
 
 //magn = magnitude("../../genres/blues/blues.00000.wav", &height, &width);
 //printf("%d %d\n",height,width);}
 magn=magnitude("../../genres/blues/blues.00000.wav", &nCol, &nRow);
+for(int i=0; i<10;i++){printf("pour Blues.0000.wav, magnitude[%d]=%f\n", i, magn[i]);}
+
 double* mean=malloc(nRow*sizeof(double));
 double* std=malloc(nRow*sizeof(double));
-
-
+reduction_vect2(magn, nCol, nRow, mean,std);
+for(int i=0; i<5;i++){printf("Moyenne %d : %f, Ecart-type %d : %f \n", i, mean[i], i, std[i]);}
 
 for (int i = 0 ; i < 4 ; i++) { // Boucle sur les 10 genres
 int len_temp=strlen(genres[i]);
@@ -52,6 +53,6 @@ for (int l=0 ; l<100 ; l++) { // Boucle sur le numéro de la musique
     fclose(f);
     free(mean);
     free(std);
-  }   
-}
+    }   
+  }
 }

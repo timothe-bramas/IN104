@@ -29,13 +29,16 @@ def normalize(X):
 
 
 features = batch_audio[:, 1:]
+print(f"Le tableau des descripteurs est de dimension : {features.shape}.")
+# Il devrait être de dimensions 1000 x 514, si le nombre de colonne n'est pas le bon vous pouvez modifier features = dataset[:, 1:-1] par features = dataset[:, 1:-2] (cela supprime les 2 dernières colonnes)
+
 
 features=normalize(features)
 y = batch_audio[:, 0]
 
 X_train, X_test, y_train, y_test = train_test_split(features, y, test_size=0.2, random_state=0)
 
-model = LinearSVC(C=0.1, max_iter=1000, tol=1e-5) 
+model = LinearSVC(C=0.1, max_iter=10000, tol=1e-5) 
 
 # On peut modifier les paramètres C, max_iter et tol, pour augmenter la performance du modèle.
 
@@ -54,12 +57,12 @@ print("Performances du modèle sur la base de données de test : ", model.score(
 
 ### Plot Confusion Matrix
 
-# labels = ['blues', 'classical', 'country', 'disco', 'hiphop', 'jazz', 'metal', 'pop', 'reggae', 'rock']
+labels = ['blues', 'classical', 'country', 'disco', 'hiphop', 'jazz', 'metal', 'pop', 'reggae', 'rock']
 
 
-# fig, ax = plt.subplots(figsize=(10, 10), dpi=300)
-# plot_confusion_matrix(model, X_test, y_test, ax=ax, normalize='true', display_labels=labels)
-# plt.savefig('confusion.png',transparent=False, facecolor='white' )
+fig, ax = plt.subplots(figsize=(10, 10), dpi=300)
+plot_confusion_matrix(model, X_test, y_test, ax=ax, normalize='true', display_labels=labels)
+plt.savefig('confusion.png',transparent=False, facecolor='white' )
 
 
 ### Technique pour obtenir une nette amélioration des performances : normaliser les entrées du classifieur avec la batch normalization (Xi - mean / (std + epsilon)) 

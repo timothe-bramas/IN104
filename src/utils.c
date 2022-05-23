@@ -55,7 +55,7 @@ double* produit_mat(double* mat1, double* mat2, int m, int n, int p){
             index=i+j*m;
             mat[index]=0;
             for(int k=0; k<n;k++){
-                mat[index]=mat[index]+ (mat1[i+k*m] * mat2[i+k*n]);
+                mat[index]=mat[index]+ (mat1[i+k*m] * mat2[k+j*n]);
             }
         }
     }

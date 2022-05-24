@@ -38,7 +38,7 @@ y = batch_audio[:, 0]
 
 X_train, X_test, y_train, y_test = train_test_split(features, y, test_size=0.2, random_state=0)
 
-model = LinearSVC(C=0.1, max_iter=10000, tol=1e-5) 
+model = LinearSVC(C=0.04, max_iter=1000, tol=1e-3) 
 
 # On peut modifier les paramètres C, max_iter et tol, pour augmenter la performance du modèle.
 
@@ -49,11 +49,11 @@ print("Performances du modèle sur la base de données de test : ", model.score(
 
 ### Save W and b
 
-# b = model.intercept_
-# w = model.coef_
+b = model.intercept_
+w = model.coef_
 
-# np.savetxt("path to w", w, fmt='%.4f',delimiter=",")
-# np.savetxt("path to b", b, fmt='%.4f',delimiter=",")
+np.savetxt("w.csv", w, fmt='%.4f',delimiter=" ")
+np.savetxt("b.csv", b, fmt='%.4f',delimiter=" ")
 
 ### Plot Confusion Matrix
 

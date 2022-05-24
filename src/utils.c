@@ -74,3 +74,33 @@ double* somme_mat(double* mat1,double* mat2,int m,int n){
     }
     return mat;
 }
+
+
+
+double* read_csv(char* filename, int nRow, int nCol){
+    double*mat=malloc(nCol*nRow*sizeof(double));
+    FILE* f=fopen(filename, "rb");
+    if(f==NULL){printf("fichier non lu\n"); return NULL;}
+    float temp;
+    int count=0;
+    fscanf(f,"%f", &temp);
+    while(!feof(f) && (count<nCol*nRow)){
+        mat[count]=temp;
+        fscanf(f,"%f", &temp);
+        count++;
+    }
+    fscanf(f,"%f", &temp);
+    mat[count]=temp;
+    if(count==nCol*nRow){printf("Fichier trop long\n");}
+    fclose(f);
+    return mat;
+}   
+
+int find_max(double*tab, int n){
+    int index=0;
+    double value=tab[0];
+    for(int i=0;i<n;i++){
+        if(value<tab[i]){value=tab[i]; index=i;}
+    }
+    return index;
+}
